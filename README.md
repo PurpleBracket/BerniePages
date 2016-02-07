@@ -11,4 +11,4 @@ then use
 
 ``` foundation watch ```
 
-to start watch process and launch browesersync 
+to start watch process and launch browsersync 
