@@ -1,0 +1,105 @@
+$colors: (
+  blue: #087ed7,
+  red: #ea504e,
+  dark-grey: #414244,
+  light-grey: #a8a69c,
+  success: #a8cf49,
+  warning: #d24f27,
+  alert: #f8ec39
+);
+
+$steps: (
+  10: lighten,
+  20: lighten,
+  30: lighten,
+  40: lighten,
+  50: lighten,
+  60: darken,
+  70: darken,
+  80: darken,
+  90: darken
+);
+
+
+@function color($color, $step) {
+
+  @if map-has-key($colors, $color) {
+    $curr_color: map-get($colors, $color);
+    @if map-has-key($steps, $step) {
+      @if $step == 50 {
+        //baseif=50
+        @return $curr_color;
+      }
+
+      @if $step < 50 {
+      //lightenif>50
+        $lighten-amount: (50 - $step)*0.85;
+        $lighter-shade: lighten($curr_color, $lighten-amount);
+        @return $lighter-shade;
+      }
+
+      @if $step > 50 {
+      //darkenif<50
+        $darken-amount: ($step - 50)*0.85;
+        $darker-shade: darken($curr_color, $darken-amount);
+        @return $darker-shade;
+      }
+    }
+    @warn "Unknown `#{name}` in $steps.";
+    @return null;
+  }
+  @warn "Unknown `#{name}` in $colors.";
+  @return null;
+
+}
+
+@each $step, $prop in $steps {
+  span.dark-grey-#{$step} {
+    background: color(dark-grey, $step);
+  }
+}
+
+@each $step, $prop in $steps {
+  span.blue-#{$step} {
+    background: color(blue, $step);
+  }
+}
+
+@each $step, $prop in $steps {
+  span.red-#{$step} {
+    background: color(red, $step);
+  }
+}
+
+@each $step, $prop in $steps {
+  span.light-grey-#{$step} {
+    background: color(light-grey, $step);
+  }
+}
+
+ul.colors{
+  list-style: none;
+  width: 100vw;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  li{
+    display: block;
+    width: 100%;
+    height: 5rem;
+    color: white;
+    text-align: center;
+    font-size: 0.65em;
+    span{
+      position: relative;
+      display: inline-block;
+      float: left;
+      width: 11%;
+      height: 5rem;
+      line-height: 5rem;
+      color: black;
+      font-size: 0.5rem;
+    }
+  }
+}

@@ -40,14 +40,13 @@ function parseData(url, callBack) {
   });
 }
 
-parseData("assets/csv/data.csv", doStuff);
 
 function doStuff(data) {
     //Data is usable here
     console.log(data);
 
     var html;
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 100; i++) {
         html+='<div class="fb-page" data-href="https://www.facebook.com/'+data[i].PageID+'" data-small-header=false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/'+data[i].PageID+'"><a href=https://www.facebook.com/'+data[i].PageID+'"></a></blockquote></div></div>';
         // html+="<td>"+ (i + 1) +"</td>";
         // html+="<td>"+data[i].Followers+"</td>";
@@ -60,3 +59,5 @@ function doStuff(data) {
     // html+="</table>";
     $("#data").html(html);
 }
+
+parseData("assets/csv/data.csv", doStuff);
